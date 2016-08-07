@@ -15,7 +15,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Shareboard</a>
+          <a class="navbar-brand" href="/">Shareboard</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -24,9 +24,13 @@
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
+          <?php if(isset($_SESSION['is_logged_in'])): ?>
+            <li class="active"><a href="<?php echo ROOT_URL; ?>users/login">Welcome <?php echo $_SESSION['user_data']['name'] ?></a></li>
+            <li class="active"><a href="<?php echo ROOT_URL; ?>users/logout">Logout</a></li>
+          <?php else :  ?>
             <li class="active"><a href="<?php echo ROOT_URL; ?>users/login">Login</a></li>
             <li class="active"><a href="<?php echo ROOT_URL; ?>users/register">Register</a></li>
-            
+            <?php endif; ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -35,6 +39,7 @@
      <div class="container">
 
     	<div class="row">
+        <?php Messages::display(); ?>
     		<?php require($view); ?>
     	</div>
 
